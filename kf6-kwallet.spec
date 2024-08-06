@@ -11,7 +11,7 @@
 Summary:	Safe desktop-wide storage for passwords
 Name:		kf6-%{kfname}
 Version:	6.4.0
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
