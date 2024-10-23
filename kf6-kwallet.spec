@@ -1,14 +1,16 @@
-#
-# Conditional build:
-%bcond_with	tests		# build with tests
 # TODO:
 # Not packaged:
 # - build with kf6-gpgmepp
+#
+# Conditional build:
+%bcond_with	tests		# test suite
+
 %define		kdeframever	6.7
 %define		qtver		5.15.2
 %define		kfname		kwallet
 
 Summary:	Safe desktop-wide storage for passwords
+Summary(pl.UTF-8):	Bezpieczny schowek na hasła dla całego środowiska
 Name:		kf6-%{kfname}
 Version:	6.7.0
 Release:	1
@@ -16,7 +18,7 @@ License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
 # Source0-md5:	56b7ee3e0fae54d9dbb1021f42d14cce
-URL:		http://www.kde.org/
+URL:		https://kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	Qt6DBus-devel >= %{qtver}
 BuildRequires:	Qt6Gui-devel >= %{qtver}
@@ -56,10 +58,7 @@ Requires:	kf6-kservice >= %{version}
 Requires:	kf6-kwidgetsaddons >= %{version}
 Requires:	kf6-kwindowsystem >= %{version}
 Requires:	libgcrypt >= 1.5.0
-#Obsoletes:	kf5-%{kfname} < %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		qt6dir		%{_libdir}/qt6
 
 %description
 This framework contains two main components:
@@ -67,8 +66,12 @@ This framework contains two main components:
   KDE work spaces.
 - The kwalletd used to safely store the passwords on KDE work spaces.
 
-The library can be built alone, without kwalletd, by setting the
-`BUILD_KWALLETD` option to `OFF`.
+%description -l pl.UTF-8
+Ten szkielet składa się z dwóch komponentów:
+- interfejsu do KWallet - bezpiecznego schowka na hasła dla przestreni
+  roboczych KDE
+- usługi kwalletd służącej do bezpiecznego przechowywania haseł w
+  przestrzeniach roboczych KDE
 
 %package devel
 Summary:	Header files for %{kfname} development
@@ -76,7 +79,6 @@ Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kfname}
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	Qt6Gui-devel >= %{qtver}
-#Obsoletes:	kf5-%{kfname}-devel < %{version}
 
 %description devel
 Header files for %{kfname} development.
@@ -99,9 +101,9 @@ Pliki nagłówkowe dla programistów używających %{kfname}.
 %ninja_build -C build test
 %endif
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %ninja_install -C build
 
 %find_lang %{kfname} --all-name --with-kde
@@ -109,8 +111,8 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files -f %{kfname}.lang
 %defattr(644,root,root,755)
