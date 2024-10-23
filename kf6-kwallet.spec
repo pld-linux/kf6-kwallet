@@ -6,24 +6,24 @@
 %bcond_with	tests		# test suite
 
 %define		kdeframever	6.7
-%define		qtver		5.15.2
+%define		qt_ver		6.5.0
 %define		kfname		kwallet
 
 Summary:	Safe desktop-wide storage for passwords
 Summary(pl.UTF-8):	Bezpieczny schowek na hasła dla całego środowiska
 Name:		kf6-%{kfname}
 Version:	6.7.0
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
 # Source0-md5:	56b7ee3e0fae54d9dbb1021f42d14cce
 URL:		https://kde.org/
-BuildRequires:	Qt6Core-devel >= %{qtver}
-BuildRequires:	Qt6DBus-devel >= %{qtver}
-BuildRequires:	Qt6Gui-devel >= %{qtver}
-BuildRequires:	Qt6Test-devel >= %{qtver}
-BuildRequires:	Qt6Widgets-devel >= %{qtver}
+BuildRequires:	Qt6Core-devel >= %{qt_ver}
+BuildRequires:	Qt6DBus-devel >= %{qt_ver}
+BuildRequires:	Qt6Gui-devel >= %{qt_ver}
+BuildRequires:	Qt6Test-devel >= %{qt_ver}
+BuildRequires:	Qt6Widgets-devel >= %{qt_ver}
 BuildRequires:	cmake >= 3.16
 BuildRequires:	gpgme-c++-devel >= 1:1.7.0
 BuildRequires:	kf6-extra-cmake-modules >= %{version}
@@ -43,9 +43,9 @@ BuildRequires:	qca-qt6-devel
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	Qt6DBus >= %{qtver}
-Requires:	Qt6Gui >= %{qtver}
-Requires:	Qt6Widgets >= %{qtver}
+Requires:	Qt6DBus >= %{qt_ver}
+Requires:	Qt6Gui >= %{qt_ver}
+Requires:	Qt6Widgets >= %{qt_ver}
 Requires:	gpgme-c++ >= 1:1.7.0
 Requires:	kf6-dirs
 Requires:	kf6-kconfig >= %{version}
@@ -58,6 +58,8 @@ Requires:	kf6-kservice >= %{version}
 Requires:	kf6-kwidgetsaddons >= %{version}
 Requires:	kf6-kwindowsystem >= %{version}
 Requires:	libgcrypt >= 1.5.0
+Provides:	kf5-kwallet-service = %{version}
+Obsoletes:	kf5-kwallet-service < 6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -78,7 +80,7 @@ Summary:	Header files for %{kfname} development
 Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kfname}
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	Qt6Gui-devel >= %{qtver}
+Requires:	Qt6Gui-devel >= %{qt_ver}
 
 %description devel
 Header files for %{kfname} development.
@@ -106,7 +108,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %ninja_install -C build
 
-%find_lang %{kfname} --all-name --with-kde
+# kwallet6-query and kwalletd6 domains
+%find_lang %{kfname} --all-name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -119,22 +122,23 @@ rm -rf $RPM_BUILD_ROOT
 %doc README.md
 %attr(755,root,root) %{_bindir}/kwallet-query
 %attr(755,root,root) %{_bindir}/kwalletd6
-%attr(755,root,root) %{_libdir}/libKF6Wallet.so.*.*
+%attr(755,root,root) %{_libdir}/libKF6Wallet.so.*.*.*
 %ghost %{_libdir}/libKF6Wallet.so.6
-%attr(755,root,root) %{_libdir}/libKF6WalletBackend.so.*.*
+%attr(755,root,root) %{_libdir}/libKF6WalletBackend.so.*.*.*
 %ghost %{_libdir}/libKF6WalletBackend.so.6
-%{_desktopdir}/org.kde.kwalletd6.desktop
 %{_datadir}/dbus-1/interfaces/kf6_org.kde.KWallet.xml
 %{_datadir}/dbus-1/services/org.kde.kwalletd5.service
 %{_datadir}/dbus-1/services/org.kde.kwalletd6.service
 %{_datadir}/knotifications6/kwalletd6.notifyrc
 %{_datadir}/qlogging-categories6/kwallet.categories
 %{_datadir}/qlogging-categories6/kwallet.renamecategories
-%{_mandir}/man1/kwallet-query.1*
 %{_datadir}/xdg-desktop-portal/portals/kwallet.portal
+%{_desktopdir}/org.kde.kwalletd6.desktop
+%{_mandir}/man1/kwallet-query.1*
 
 %files devel
 %defattr(644,root,root,755)
+%{_libdir}/libKF6Wallet.so
+%{_libdir}/libKF6WalletBackend.so.6
 %{_includedir}/KF6/KWallet
 %{_libdir}/cmake/KF6Wallet
-%{_libdir}/libKF6Wallet.so
