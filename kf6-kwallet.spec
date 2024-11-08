@@ -5,19 +5,19 @@
 # Conditional build:
 %bcond_with	tests		# test suite
 
-%define		kdeframever	6.7
+%define		kdeframever	6.8
 %define		qt_ver		6.5.0
 %define		kfname		kwallet
 
 Summary:	Safe desktop-wide storage for passwords
 Summary(pl.UTF-8):	Bezpieczny schowek na hasła dla całego środowiska
 Name:		kf6-%{kfname}
-Version:	6.7.0
-Release:	2
+Version:	6.8.0
+Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	56b7ee3e0fae54d9dbb1021f42d14cce
+# Source0-md5:	2ad9372d8b3b28ac6853fe54af4cebd6
 URL:		https://kde.org/
 BuildRequires:	Qt6Core-devel >= %{qt_ver}
 BuildRequires:	Qt6DBus-devel >= %{qt_ver}
