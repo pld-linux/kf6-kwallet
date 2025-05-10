@@ -5,19 +5,19 @@
 # Conditional build:
 %bcond_with	tests		# test suite
 
-%define		kdeframever	6.13
+%define		kdeframever	6.14
 %define		qt_ver		6.5.0
 %define		kfname		kwallet
 
 Summary:	Safe desktop-wide storage for passwords
 Summary(pl.UTF-8):	Bezpieczny schowek na hasła dla całego środowiska
 Name:		kf6-%{kfname}
-Version:	6.13.0
+Version:	6.14.0
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	6d40ad91d72406c3e8b1d55655cc35f0
+# Source0-md5:	5b399f3c9bbeabc0d434ee553c34e3f1
 URL:		https://kde.org/
 BuildRequires:	Qt6Core-devel >= %{qt_ver}
 BuildRequires:	Qt6DBus-devel >= %{qt_ver}
@@ -126,25 +126,26 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{kfname}.lang
 %defattr(644,root,root,755)
 %doc README.md
+%attr(755,root,root) %{_bindir}/ksecretd
 %attr(755,root,root) %{_bindir}/kwallet-query
 %attr(755,root,root) %{_bindir}/kwalletd6
 %attr(755,root,root) %{_libdir}/libKF6Wallet.so.*.*.*
 %ghost %{_libdir}/libKF6Wallet.so.6
 %attr(755,root,root) %{_libdir}/libKF6WalletBackend.so.*.*.*
 %ghost %{_libdir}/libKF6WalletBackend.so.6
+%{_desktopdir}/org.kde.ksecretd.desktop
 %{_datadir}/dbus-1/interfaces/kf6_org.kde.KWallet.xml
 %{_datadir}/dbus-1/services/org.kde.kwalletd5.service
 %{_datadir}/dbus-1/services/org.kde.kwalletd6.service
-%{_datadir}/knotifications6/kwalletd6.notifyrc
+%{_datadir}/dbus-1/services/org.kde.secretservicecompat.service
 %{_datadir}/qlogging-categories6/kwallet.categories
 %{_datadir}/qlogging-categories6/kwallet.renamecategories
 %{_datadir}/xdg-desktop-portal/portals/kwallet.portal
-%{_desktopdir}/org.kde.kwalletd6.desktop
+%{_datadir}/knotifications6/ksecretd.notifyrc
 %{_mandir}/man1/kwallet-query.1*
 
 %files devel
 %defattr(644,root,root,755)
 %{_libdir}/libKF6Wallet.so
-%{_libdir}/libKF6WalletBackend.so.6
 %{_includedir}/KF6/KWallet
 %{_libdir}/cmake/KF6Wallet
