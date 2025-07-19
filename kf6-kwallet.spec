@@ -25,7 +25,7 @@ BuildRequires:	Qt6Gui-devel >= %{qt_ver}
 BuildRequires:	Qt6Test-devel >= %{qt_ver}
 BuildRequires:	Qt6Widgets-devel >= %{qt_ver}
 BuildRequires:	cmake >= 3.16
-BuildRequires:	gpgme-c++-devel >= 1:1.7.0
+BuildRequires:	gpgmepp-devel >= 1:1.7.0
 BuildRequires:	kf6-extra-cmake-modules >= %{version}
 BuildRequires:	kf6-kconfig-devel >= %{version}
 BuildRequires:	kf6-kconfigwidgets-devel >= %{version}
@@ -47,7 +47,7 @@ Requires(post,postun):	desktop-file-utils
 Requires:	Qt6DBus >= %{qt_ver}
 Requires:	Qt6Gui >= %{qt_ver}
 Requires:	Qt6Widgets >= %{qt_ver}
-Requires:	gpgme-c++ >= 1:1.7.0
+Requires:	gpgmepp >= 1:1.7.0
 Requires:	kf6-dirs
 Requires:	kf6-kconfig >= %{version}
 Requires:	kf6-kconfigwidgets >= %{version}
