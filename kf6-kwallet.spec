@@ -5,19 +5,19 @@
 # Conditional build:
 %bcond_with	tests		# test suite
 
-%define		kdeframever	6.16
+%define		kdeframever	6.17
 %define		qt_ver		6.5.0
 %define		kfname		kwallet
 
 Summary:	Safe desktop-wide storage for passwords
 Summary(pl.UTF-8):	Bezpieczny schowek na hasła dla całego środowiska
 Name:		kf6-%{kfname}
-Version:	6.16.0
+Version:	6.17.0
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	28ade54eb586dfae17712481ac6fe109
+# Source0-md5:	be6b34cd7395ce1bfbb026202a0fb049
 URL:		https://kde.org/
 BuildRequires:	Qt6Core-devel >= %{qt_ver}
 BuildRequires:	Qt6DBus-devel >= %{qt_ver}
@@ -25,7 +25,7 @@ BuildRequires:	Qt6Gui-devel >= %{qt_ver}
 BuildRequires:	Qt6Test-devel >= %{qt_ver}
 BuildRequires:	Qt6Widgets-devel >= %{qt_ver}
 BuildRequires:	cmake >= 3.16
-BuildRequires:	gpgmepp-devel >= 1:1.7.0
+BuildRequires:	gpgmepp-devel >= 1.7.0
 BuildRequires:	kf6-extra-cmake-modules >= %{version}
 BuildRequires:	kf6-kconfig-devel >= %{version}
 BuildRequires:	kf6-kconfigwidgets-devel >= %{version}
@@ -47,7 +47,7 @@ Requires(post,postun):	desktop-file-utils
 Requires:	Qt6DBus >= %{qt_ver}
 Requires:	Qt6Gui >= %{qt_ver}
 Requires:	Qt6Widgets >= %{qt_ver}
-Requires:	gpgmepp >= 1:1.7.0
+Requires:	gpgmepp >= 1.7.0
 Requires:	kf6-dirs
 Requires:	kf6-kconfig >= %{version}
 Requires:	kf6-kconfigwidgets >= %{version}
