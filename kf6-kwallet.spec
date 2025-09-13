@@ -5,19 +5,19 @@
 # Conditional build:
 %bcond_with	tests		# test suite
 
-%define		kdeframever	6.17
+%define		kdeframever	6.18
 %define		qt_ver		6.5.0
 %define		kfname		kwallet
 
 Summary:	Safe desktop-wide storage for passwords
 Summary(pl.UTF-8):	Bezpieczny schowek na hasła dla całego środowiska
 Name:		kf6-%{kfname}
-Version:	6.17.0
+Version:	6.18.0
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
-# Source0-md5:	be6b34cd7395ce1bfbb026202a0fb049
+# Source0-md5:	2d61e2f551a58fa73792507e9704c971
 URL:		https://kde.org/
 BuildRequires:	Qt6Core-devel >= %{qt_ver}
 BuildRequires:	Qt6DBus-devel >= %{qt_ver}
@@ -61,6 +61,7 @@ Requires:	kf6-kwindowsystem >= %{version}
 Requires:	libgcrypt >= 1.5.0
 Provides:	kf5-kwallet-service = %{version}
 Obsoletes:	kf5-kwallet-service < 6
+%requires_eq_to Qt6Core Qt6Core-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -135,6 +136,7 @@ rm -rf $RPM_BUILD_ROOT
 %ghost %{_libdir}/libKF6WalletBackend.so.6
 %{_desktopdir}/org.kde.ksecretd.desktop
 %{_datadir}/dbus-1/interfaces/kf6_org.kde.KWallet.xml
+%{_datadir}/dbus-1/services/org.freedesktop.impl.portal.desktop.kwallet.service
 %{_datadir}/dbus-1/services/org.kde.kwalletd5.service
 %{_datadir}/dbus-1/services/org.kde.kwalletd6.service
 %{_datadir}/dbus-1/services/org.kde.secretservicecompat.service
