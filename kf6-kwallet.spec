@@ -13,7 +13,7 @@ Summary:	Safe desktop-wide storage for passwords
 Summary(pl.UTF-8):	Bezpieczny schowek na hasła dla całego środowiska
 Name:		kf6-%{kfname}
 Version:	6.22.0
-Release:	2
+Release:	3
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/frameworks/%{kdeframever}/%{kfname}-%{version}.tar.xz
@@ -38,6 +38,7 @@ BuildRequires:	kf6-kservice-devel >= %{version}
 BuildRequires:	kf6-kwidgetsaddons-devel >= %{version}
 BuildRequires:	kf6-kwindowsystem-devel >= %{version}
 BuildRequires:	libgcrypt-devel >= 1.5.0
+BuildRequires:	libsecret-devel
 BuildRequires:	ninja
 BuildRequires:	qca-qt6-devel
 BuildRequires:	rpmbuild(macros) >= 1.736
